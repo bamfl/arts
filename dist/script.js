@@ -90,10 +90,50 @@
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
 
+document.addEventListener('DOMContentLoaded', function () {
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_0__["default"])();
+});
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var slider = function slider() {
+  var initSlider = function initSlider(sliderSelector) {
+    var slider = document.querySelector(sliderSelector),
+        wrapper = slider.lastElementChild;
+    var counter = 1;
+
+    var nextSlide = function nextSlide() {
+      if (counter < wrapper.children.length) {
+        wrapper.style.cssText = "\n\t\t\t\t\ttransform: translateY(-".concat(counter * parseInt(getComputedStyle(slider).height), "px);\n\t\t\t\t");
+        counter++;
+      } else {
+        clearInterval(intervalId);
+      }
+    };
+
+    var intervalId = setInterval(nextSlide, 3000);
+  };
+
+  initSlider('.main-slider');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ })
 
