@@ -16,7 +16,7 @@ const slider = () => {
 			}
 		};
 
-		const intervalId = setInterval(nextSlide, 3000);
+		const intervalId = setInterval(nextSlide, 5000);
 	};
 
 	initSlider('.main-slider');
