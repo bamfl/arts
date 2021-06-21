@@ -28,7 +28,7 @@ const modals = () => {
 		});
 	};
 
-	const timerId = setTimeout(() => openPopupAction('.popup'), 60000);
+	const timerId = setTimeout(() => openPopupAction('.popup-design'), 60000);
 
 	openPopup('.button-design', '.popup-design');
 	closePopup('.popup-design');

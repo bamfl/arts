@@ -2695,6 +2695,39 @@ addToUnscopables('entries');
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/es.function.name.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.function.name.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var defineProperty = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js").f;
+
+var FunctionPrototype = Function.prototype;
+var FunctionPrototypeToString = FunctionPrototype.toString;
+var nameRE = /^\s*function ([^ (]*)/;
+var NAME = 'name';
+
+// Function instances `.name` property
+// https://tc39.github.io/ecma262/#sec-function-instances-name
+if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
+  defineProperty(FunctionPrototype, NAME, {
+    configurable: true,
+    get: function () {
+      try {
+        return FunctionPrototypeToString.call(this).match(nameRE)[1];
+      } catch (error) {
+        return '';
+      }
+    }
+  });
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/es.object.from-entries.js":
 /*!****************************************************************!*\
   !*** ./node_modules/core-js/modules/es.object.from-entries.js ***!
@@ -3319,8 +3352,108 @@ document.addEventListener('DOMContentLoaded', function () {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.iterator */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_object_from_entries__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.from-entries */ "./node_modules/core-js/modules/es.object.from-entries.js");
+/* harmony import */ var core_js_modules_es_object_from_entries__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_from_entries__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.promise */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.promise.finally */ "./node_modules/core-js/modules/es.promise.finally.js");
+/* harmony import */ var core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_finally__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+
 var calc = function calc() {
-  alert('calc');
+  var form = document.querySelector('#calc'),
+      fileHeader = form.querySelector('.file_upload'),
+      file = form.querySelector('#file'),
+      size = form.querySelector('#size'),
+      material = form.querySelector('#material'),
+      options = form.querySelector('#options'),
+      promocode = form.querySelector('#promocode');
+
+  var calcPrice = function calcPrice() {
+    var price = 0;
+
+    if (size.value !== '0' && material.value !== '0') {
+      if (size.value === '40x50') {
+        price += 1000;
+      } else if (size.value === '50x70') {
+        price += 1500;
+      } else if (size.value === '70x70') {
+        price += 2000;
+      } else if (size.value === '70x100') {
+        price += 2500;
+      }
+
+      if (material.value === 'fiber') {
+        price += 1500;
+      } else if (material.value === 'linen') {
+        price += 2000;
+      } else if (material.value === 'cotton') {
+        price += 2500;
+      }
+
+      if (options.value === 'gel') {
+        price += 1500;
+      } else if (options.value === 'express') {
+        price += 2000;
+      } else if (options.value === 'delivery') {
+        price += 2500;
+      }
+
+      if (promocode.value === 'IWANTPOPART') {
+        document.querySelector('.calc-price').innerHTML = price * 0.7;
+      } else {
+        document.querySelector('.calc-price').innerHTML = price;
+      }
+    }
+  };
+
+  file.addEventListener('change', function () {
+    fileHeader.innerHTML = file.files[0].name;
+  });
+  size.addEventListener('change', function () {
+    return calcPrice();
+  });
+  material.addEventListener('change', function () {
+    return calcPrice();
+  });
+  options.addEventListener('change', function () {
+    return calcPrice();
+  });
+  promocode.addEventListener('change', function () {
+    return calcPrice();
+  });
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var messageDiv = document.createElement('div');
+    messageDiv.innerHTML = 'Отправка данных';
+    form.append(messageDiv);
+    var formData = new FormData(form);
+    formData.append('file', file.files[0]);
+    fetch('./assets/server.php', {
+      method: 'POST',
+      body: JSON.stringify(Object.fromEntries(formData.entries()))
+    }).then(function () {
+      messageDiv.innerHTML = 'Данные успешно отправлены!';
+    }).catch(function (error) {
+      messageDiv.innerHTML = "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 ".concat(error);
+    }).finally(setTimeout(function () {
+      form.reset();
+    }, 5000));
+  });
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (calc);
@@ -3410,7 +3543,7 @@ function forms() {
     });
   };
 
-  document.querySelectorAll('form, .form').forEach(function (form) {
+  document.querySelectorAll('.form').forEach(function (form) {
     return postForm(form);
   });
 }
@@ -3463,7 +3596,7 @@ var modals = function modals() {
   };
 
   var timerId = setTimeout(function () {
-    return openPopupAction('.popup');
+    return openPopupAction('.popup-design');
   }, 60000);
   openPopup('.button-design', '.popup-design');
   closePopup('.popup-design');
