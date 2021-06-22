@@ -668,6 +668,7 @@ h4 {
 .portfolio-block {
   width: 20%;
   padding: 0.5rem;
+	display: none;
 }
 .portfolio-block img {
   max-width: 100%;

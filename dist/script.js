@@ -3328,6 +3328,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_showMore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/showMore */ "./src/js/modules/showMore.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
+
 
 
 
@@ -3339,6 +3341,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_2__["default"])();
   Object(_modules_showMore__WEBPACK_IMPORTED_MODULE_3__["default"])();
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_4__["default"])();
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
 });
 
 /***/ }),
@@ -3669,6 +3672,57 @@ var slider = function slider() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (slider);
+
+/***/ }),
+
+/***/ "./src/js/modules/tabs.js":
+/*!********************************!*\
+  !*** ./src/js/modules/tabs.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var tabs = function tabs() {
+  var tabsContainer = document.querySelector('#portfolio'),
+      tabsMenu = tabsContainer.querySelector('.portfolio-menu'),
+      tabsMenuItem = tabsContainer.querySelectorAll('.portfolio-menu li'),
+      tabsContent = tabsContainer.querySelectorAll('.portfolio-block'),
+      noContent = tabsContainer.querySelector('.portfolio-no');
+  tabsMenu.addEventListener('click', function (event) {
+    tabsMenuItem.forEach(function (tab) {
+      tab.classList.remove('active');
+
+      if (event.target === tab) {
+        event.target.classList.add('active');
+        noContent.style.display = 'block';
+        tabsContent.forEach(function (tabContent) {
+          tabContent.style.display = 'none';
+
+          if (tabContent.classList.contains(event.target.classList[0])) {
+            tabContent.style.display = 'block';
+            noContent.style.display = 'none';
+          }
+        });
+      }
+    });
+  });
+
+  var initTabs = function initTabs() {
+    tabsContent.forEach(function (tabContent) {
+      tabContent.style.display = 'block';
+    });
+  };
+
+  initTabs();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tabs);
 
 /***/ })
 
