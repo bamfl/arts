@@ -5,6 +5,7 @@ import showMore from './modules/showMore';
 import calc from './modules/calc';
 import tabs from './modules/tabs';
 import hoverArts from './modules/hoverArts';
+import accordion from './modules/accordion';
 
 document.addEventListener('DOMContentLoaded', () => {
 	slider();
@@ -14,4 +15,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	calc();
 	tabs();
 	hoverArts();
+	accordion();
 });

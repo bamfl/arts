@@ -3489,6 +3489,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hoverArts */ "./src/js/modules/hoverArts.js");
+/* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+
 
 
 
@@ -3504,7 +3506,48 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_4__["default"])();
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__["default"])();
+  Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
+
+/***/ }),
+
+/***/ "./src/js/modules/accordion.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/accordion.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var accordion = function accordion() {
+  var accordionHeaders = document.querySelectorAll('.accordion-heading'),
+      accordionContents = document.querySelectorAll('.accordion-block');
+
+  var closeContent = function closeContent() {
+    accordionContents.forEach(function (item) {
+      item.style.cssText = "\n\t\t\t\theight: 0px;\n\t\t\t\toverflow: hidden; \n\t\t\t\tmargin: 0; \n\t\t\t\tpadding: 0; \n\t\t\t\tbackground-color: #fff;\n\t\t\t\tfont-size: 0;\n\t\t\t";
+    });
+  };
+
+  var openContent = function openContent() {
+    accordionHeaders.forEach(function (item, idx) {
+      item.addEventListener('click', function () {
+        closeContent();
+        accordionContents[idx].style.cssText = "\n\t\t\t\t\ttransition: padding-top 0.5s, padding-bottom 0.5s, margin-top 0.5s, margin-bottom 0.5s, font-size 0.5s;\n\t\t\t\t";
+      });
+    });
+  };
+
+  closeContent();
+  openContent();
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (accordion);
 
 /***/ }),
 
