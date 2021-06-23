@@ -2660,6 +2660,78 @@ module.exports = function (name) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/es.array.concat.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.concat.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+var isArray = __webpack_require__(/*! ../internals/is-array */ "./node_modules/core-js/internals/is-array.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var toLength = __webpack_require__(/*! ../internals/to-length */ "./node_modules/core-js/internals/to-length.js");
+var createProperty = __webpack_require__(/*! ../internals/create-property */ "./node_modules/core-js/internals/create-property.js");
+var arraySpeciesCreate = __webpack_require__(/*! ../internals/array-species-create */ "./node_modules/core-js/internals/array-species-create.js");
+var arrayMethodHasSpeciesSupport = __webpack_require__(/*! ../internals/array-method-has-species-support */ "./node_modules/core-js/internals/array-method-has-species-support.js");
+var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
+var V8_VERSION = __webpack_require__(/*! ../internals/v8-version */ "./node_modules/core-js/internals/v8-version.js");
+
+var IS_CONCAT_SPREADABLE = wellKnownSymbol('isConcatSpreadable');
+var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
+var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
+
+// We can't use this feature detection in V8 since it causes
+// deoptimization and serious performance degradation
+// https://github.com/zloirock/core-js/issues/679
+var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails(function () {
+  var array = [];
+  array[IS_CONCAT_SPREADABLE] = false;
+  return array.concat()[0] !== array;
+});
+
+var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('concat');
+
+var isConcatSpreadable = function (O) {
+  if (!isObject(O)) return false;
+  var spreadable = O[IS_CONCAT_SPREADABLE];
+  return spreadable !== undefined ? !!spreadable : isArray(O);
+};
+
+var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT;
+
+// `Array.prototype.concat` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.concat
+// with adding support of @@isConcatSpreadable and @@species
+$({ target: 'Array', proto: true, forced: FORCED }, {
+  concat: function concat(arg) { // eslint-disable-line no-unused-vars
+    var O = toObject(this);
+    var A = arraySpeciesCreate(O, 0);
+    var n = 0;
+    var i, k, length, len, E;
+    for (i = -1, length = arguments.length; i < length; i++) {
+      E = i === -1 ? O : arguments[i];
+      if (isConcatSpreadable(E)) {
+        len = toLength(E.length);
+        if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
+      } else {
+        if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+        createProperty(A, n++, E);
+      }
+    }
+    A.length = n;
+    return A;
+  }
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/es.array.iterator.js":
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.iterator.js ***!
@@ -3775,25 +3847,59 @@ var showMore = function showMore() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
+
+
 var slider = function slider() {
-  var initSlider = function initSlider(sliderSelector) {
+  var initSlider = function initSlider(sliderSelector, direction) {
     var slider = document.querySelector(sliderSelector),
-        wrapper = slider.lastElementChild;
-    var counter = 1;
+        wrapper = slider.lastElementChild,
+        prevBtn = document.querySelector('.main-prev-btn'),
+        nextBtn = document.querySelector('.main-next-btn');
+    var counter = 0;
+
+    var prevSlide = function prevSlide() {
+      if (counter > 0) {
+        console.log(counter);
+
+        if (direction === 'Y') {
+          wrapper.style.cssText = "\n\t\t\t\t\ttransform: translate".concat(direction, "(-").concat((counter - 1) * parseInt(getComputedStyle(slider).height), "px);\n\t\t\t\t\t");
+        } else {
+          wrapper.style.cssText = "\n\t\t\t\t\ttransform: translate".concat(direction, "(-").concat((counter - 1) * parseInt(getComputedStyle(slider).width), "px);\n\t\t\t\t\t");
+        }
+
+        counter--;
+      } else {
+        clearInterval(intervalId);
+      }
+    };
 
     var nextSlide = function nextSlide() {
-      if (counter < wrapper.children.length) {
-        wrapper.style.cssText = "\n\t\t\t\t\ttransform: translateY(-".concat(counter * parseInt(getComputedStyle(slider).height), "px);\n\t\t\t\t");
+      if (counter < wrapper.children.length - 1) {
+        if (direction === 'Y') {
+          wrapper.style.cssText = "\n\t\t\t\t\t\ttransform: translate".concat(direction, "(-").concat((counter + 1) * parseInt(getComputedStyle(slider).height), "px);\n\t\t\t\t\t");
+        } else {
+          wrapper.style.cssText = "\n\t\t\t\t\t\ttransform: translate".concat(direction, "(-").concat((counter + 1) * parseInt(getComputedStyle(slider).width), "px);\n\t\t\t\t\t");
+        }
+
         counter++;
       } else {
         clearInterval(intervalId);
       }
     };
 
+    prevBtn.addEventListener('click', function () {
+      prevSlide();
+    });
+    nextBtn.addEventListener('click', function () {
+      nextSlide();
+    });
     var intervalId = setInterval(nextSlide, 5000);
   };
 
-  initSlider('.main-slider');
+  initSlider('.main-slider', 'Y');
+  initSlider('.feedback-slider', 'X');
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (slider);

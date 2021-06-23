@@ -862,9 +862,19 @@ h4 {
 .feedback {
   background-color: #f7e7e6;
   padding: 9rem 0;
+	overflow: hidden;
+}
+.feedback-slider {
+	overflow: hidden;
+}
+.feedback-slider-wrp {
+	display: flex;
+	transition: all 1s;
 }
 .feedback-slider-item {
   padding-bottom: 5rem;
+	flex: 1 1 auto;
+	min-width: 100%;
 }
 .feedback-block {
   position: relative;
