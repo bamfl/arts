@@ -3490,6 +3490,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hoverArts */ "./src/js/modules/hoverArts.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
+/* harmony import */ var _modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/burgerMenu */ "./src/js/modules/burgerMenu.js");
+
 
 
 
@@ -3507,6 +3509,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_5__["default"])();
   Object(_modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_7__["default"])();
+  Object(_modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__["default"])();
 });
 
 /***/ }),
@@ -3548,6 +3551,27 @@ var accordion = function accordion() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/burgerMenu.js":
+/*!**************************************!*\
+  !*** ./src/js/modules/burgerMenu.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var burgerMenu = function burgerMenu() {
+  var burgerBtn = document.querySelector('.header .burger'),
+      burgerMenu = document.querySelector('.header .burger-menu');
+  burgerBtn.addEventListener('click', function () {
+    burgerMenu.classList.toggle('active');
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (burgerMenu);
 
 /***/ }),
 
@@ -3712,41 +3736,80 @@ function forms() {
         return /[а-я]/i.test(text);
       };
 
-      if (!isNaN(form[3].value) && form[3].value.length === 11 && isCyrillic(form[2].value) && isCyrillic(form[5].value)) {
-        fetch('./assets/server.php', {
-          method: 'POST',
-          body: JSON.stringify(Object.fromEntries(formData.entries()))
-        }).then(function () {
-          messageDiv.innerHTML = 'Данные успешно отправлены!';
-        }).catch(function (error) {
-          messageDiv.innerHTML = "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 ".concat(error);
-        }).finally(setTimeout(function () {
-          form.reset();
-          messageDiv.remove();
-        }, 5000));
-      } else if (!isCyrillic(form[2].value) && !isCyrillic(form[5].value)) {
-        messageDiv.innerHTML = 'Допустим только русский язык';
-        form[2].style.cssText = 'border: 2px solid red';
-        form[5].style.cssText = 'border: 2px solid red';
-        setTimeout(function () {
-          form[2].style.cssText = '';
-          form[5].style.cssText = '';
-          messageDiv.remove();
-        }, 5000);
-      } else if (form[3].value.length < 11) {
-        messageDiv.innerHTML = 'Короткий номер! Минимум 11 символов';
-        form[3].style.cssText = 'border: 2px solid red';
-        setTimeout(function () {
-          form[3].style.cssText = '';
-          messageDiv.remove();
-        }, 5000);
+      if (form.length === 7) {
+        if (!isNaN(form[3].value) && form[3].value.length === 11 && isCyrillic(form[2].value) && isCyrillic(form[5].value)) {
+          fetch('./assets/server.php', {
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData.entries()))
+          }).then(function () {
+            messageDiv.innerHTML = 'Данные успешно отправлены!';
+          }).catch(function (error) {
+            messageDiv.innerHTML = "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 ".concat(error);
+          }).finally(setTimeout(function () {
+            form.reset();
+            messageDiv.remove();
+          }, 5000));
+        } else if (!isCyrillic(form[2].value) && !isCyrillic(form[5].value)) {
+          messageDiv.innerHTML = 'Допустим только русский язык';
+          form[2].style.cssText = 'border: 2px solid red';
+          form[5].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[2].style.cssText = '';
+            form[5].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        } else if (form[3].value.length < 11) {
+          messageDiv.innerHTML = 'Короткий номер! Минимум 11 символов';
+          form[3].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[3].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        } else {
+          messageDiv.innerHTML = 'В телефоне допустимы только цифры';
+          form[3].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[3].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        }
       } else {
-        messageDiv.innerHTML = 'В телефоне допустимы только цифры';
-        form[3].style.cssText = 'border: 2px solid red';
-        setTimeout(function () {
-          form[3].style.cssText = '';
-          messageDiv.remove();
-        }, 5000);
+        if (!isNaN(form[1].value) && form[1].value.length === 11 && isCyrillic(form[0].value) && isCyrillic(form[3].value)) {
+          fetch('./assets/server.php', {
+            method: 'POST',
+            body: JSON.stringify(Object.fromEntries(formData.entries()))
+          }).then(function () {
+            messageDiv.innerHTML = 'Данные успешно отправлены!';
+          }).catch(function (error) {
+            messageDiv.innerHTML = "\u041F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u0430 \u043E\u0448\u0438\u0431\u043A\u0430 ".concat(error);
+          }).finally(setTimeout(function () {
+            form.reset();
+            messageDiv.remove();
+          }, 5000));
+        } else if (!isCyrillic(form[0].value) && !isCyrillic(form[3].value)) {
+          messageDiv.innerHTML = 'Допустим только русский язык';
+          form[0].style.cssText = 'border: 2px solid red';
+          form[3].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[0].style.cssText = '';
+            form[3].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        } else if (form[1].value.length < 11) {
+          messageDiv.innerHTML = 'Короткий номер! Минимум 11 символов';
+          form[1].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[1].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        } else {
+          messageDiv.innerHTML = 'В телефоне допустимы только цифры';
+          form[1].style.cssText = 'border: 2px solid red';
+          setTimeout(function () {
+            form[1].style.cssText = '';
+            messageDiv.remove();
+          }, 5000);
+        }
       }
     });
   };
@@ -3811,6 +3874,7 @@ __webpack_require__.r(__webpack_exports__);
 var modals = function modals() {
   var openPopupAction = function openPopupAction(popupSelector) {
     document.querySelector(popupSelector).style.cssText = 'display: block';
+    document.body.style.cssText = "\n\t\t\toverflow: hidden;\n\t\t";
 
     if (popupSelector === '.popup-gift') {
       document.querySelector('.fixed-gift').style.cssText = 'display: none';
@@ -3819,12 +3883,23 @@ var modals = function modals() {
     clearTimeout(timerId);
   };
 
+  var isOnce = true;
+  document.body.addEventListener('scroll', function () {
+    var condition = document.body.scrollTop + document.documentElement.clientHeight >= document.body.scrollHeight;
+    console.log(document.body.scrollTop + document.documentElement.clientHeight);
+    console.log(document.body.scrollHeight);
+
+    if (condition && isOnce) {
+      openPopupAction('.popup-gift');
+      isOnce = false;
+    }
+  });
+
   var openPopup = function openPopup(btnSelector, popupSelector) {
     document.querySelectorAll(btnSelector).forEach(function (btn) {
       btn.addEventListener('click', function (event) {
         event.preventDefault();
         openPopupAction(popupSelector);
-        document.body.style.cssText = 'overflow: hidden';
       });
     });
   };
@@ -3839,7 +3914,7 @@ var modals = function modals() {
   };
 
   var timerId = setTimeout(function () {
-    return openPopupAction('.popup-design');
+    return openPopupAction('.popup-consultation');
   }, 60000);
   openPopup('.button-design', '.popup-design');
   closePopup('.popup-design');

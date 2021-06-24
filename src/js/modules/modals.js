@@ -1,6 +1,9 @@
 const modals = () => {
 	const openPopupAction = (popupSelector) => {
 		document.querySelector(popupSelector).style.cssText = 'display: block';
+		document.body.style.cssText = `
+			overflow: hidden;
+		`;
 
 		if (popupSelector === '.popup-gift') {
 			document.querySelector('.fixed-gift').style.cssText = 'display: none';
@@ -9,12 +12,25 @@ const modals = () => {
 		clearTimeout(timerId);
 	};
 
+	let isOnce = true;
+
+	document.body.addEventListener('scroll', () => {
+		let condition = document.body.scrollTop + document.documentElement.clientHeight >= document.body.scrollHeight;
+
+		console.log(document.body.scrollTop + document.documentElement.clientHeight);
+		console.log(document.body.scrollHeight);
+		
+		if (condition && isOnce) {
+			openPopupAction('.popup-gift');
+			isOnce = false;
+		}
+	});
+
 	const openPopup = (btnSelector, popupSelector) => {
 		document.querySelectorAll(btnSelector).forEach(btn => {
 			btn.addEventListener('click', (event) => {
 				event.preventDefault();
 				openPopupAction(popupSelector);
-				document.body.style.cssText = 'overflow: hidden';
 			});
 		});
 	};
@@ -28,7 +44,7 @@ const modals = () => {
 		});
 	};
 
-	const timerId = setTimeout(() => openPopupAction('.popup-design'), 60000);
+	const timerId = setTimeout(() => openPopupAction('.popup-consultation'), 60000);
 
 	openPopup('.button-design', '.popup-design');
 	closePopup('.popup-design');

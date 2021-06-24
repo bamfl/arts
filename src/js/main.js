@@ -6,6 +6,7 @@ import calc from './modules/calc';
 import tabs from './modules/tabs';
 import hoverArts from './modules/hoverArts';
 import accordion from './modules/accordion';
+import burgerMenu from './modules/burgerMenu';
 
 document.addEventListener('DOMContentLoaded', () => {
 	slider();
@@ -16,4 +17,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	tabs();
 	hoverArts();
 	accordion();
+	burgerMenu();
 });
