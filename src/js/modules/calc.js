@@ -7,9 +7,9 @@ const calc = () => {
 				options = form.querySelector('#options'),
 				promocode = form.querySelector('#promocode');
 
-	const calcPrice = () => {
-		let price = 0;
+	let price = 0;
 
+	const calcPrice = () => {
 		if (size.value !== '0' && material.value !== '0') {
 			if (size.value === '40x50') {
 				price += 1000;
@@ -63,9 +63,10 @@ const calc = () => {
 		let messageDiv = document.createElement('div');
 		messageDiv.innerHTML = 'Отправка данных';
 		form.append(messageDiv);
-
+		
 		const formData = new FormData(form);
 		formData.append('file', file.files[0]);
+		formData.append('price', price);
 
 		fetch('./assets/server.php', {
 			method: 'POST',
