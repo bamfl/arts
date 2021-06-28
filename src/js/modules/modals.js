@@ -16,9 +16,6 @@ const modals = () => {
 
 	document.body.addEventListener('scroll', () => {
 		let condition = document.body.scrollTop + document.documentElement.clientHeight >= document.body.scrollHeight;
-
-		console.log(document.body.scrollTop + document.documentElement.clientHeight);
-		console.log(document.body.scrollHeight);
 		
 		if (condition && isOnce) {
 			openPopupAction('.popup-gift');

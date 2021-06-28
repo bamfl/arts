@@ -7,6 +7,7 @@ import tabs from './modules/tabs';
 import hoverArts from './modules/hoverArts';
 import accordion from './modules/accordion';
 import burgerMenu from './modules/burgerMenu';
+import anchorScroll from './modules/anchorScroll';
 
 document.addEventListener('DOMContentLoaded', () => {
 	slider();
@@ -18,4 +19,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	hoverArts();
 	accordion();
 	burgerMenu();
+	anchorScroll('.pageup');
 });

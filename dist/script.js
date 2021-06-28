@@ -3491,6 +3491,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hoverArts */ "./src/js/modules/hoverArts.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
 /* harmony import */ var _modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/burgerMenu */ "./src/js/modules/burgerMenu.js");
+/* harmony import */ var _modules_anchorScroll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/anchorScroll */ "./src/js/modules/anchorScroll.js");
+
 
 
 
@@ -3510,6 +3512,7 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  Object(_modules_anchorScroll__WEBPACK_IMPORTED_MODULE_9__["default"])('.pageup');
 });
 
 /***/ }),
@@ -3551,6 +3554,32 @@ var accordion = function accordion() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (accordion);
+
+/***/ }),
+
+/***/ "./src/js/modules/anchorScroll.js":
+/*!****************************************!*\
+  !*** ./src/js/modules/anchorScroll.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var anchorScroll = function anchorScroll(upSelector) {
+  var upElem = document.querySelector(upSelector);
+  document.body.addEventListener('scroll', function () {
+    if (document.body.scrollTop > 1650) {
+      upElem.classList.add('animated', 'fadeIn');
+      upElem.classList.remove('fadeOut');
+    } else {
+      upElem.classList.add('fadeOut');
+      upElem.classList.remove('fadeIn');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (anchorScroll);
 
 /***/ }),
 
@@ -3614,10 +3643,9 @@ var calc = function calc() {
       material = form.querySelector('#material'),
       options = form.querySelector('#options'),
       promocode = form.querySelector('#promocode');
+  var price = 0;
 
   var calcPrice = function calcPrice() {
-    var price = 0;
-
     if (size.value !== '0' && material.value !== '0') {
       if (size.value === '40x50') {
         price += 1000;
@@ -3675,6 +3703,7 @@ var calc = function calc() {
     form.append(messageDiv);
     var formData = new FormData(form);
     formData.append('file', file.files[0]);
+    formData.append('price', price);
     fetch('./assets/server.php', {
       method: 'POST',
       body: JSON.stringify(Object.fromEntries(formData.entries()))
@@ -3886,8 +3915,6 @@ var modals = function modals() {
   var isOnce = true;
   document.body.addEventListener('scroll', function () {
     var condition = document.body.scrollTop + document.documentElement.clientHeight >= document.body.scrollHeight;
-    console.log(document.body.scrollTop + document.documentElement.clientHeight);
-    console.log(document.body.scrollHeight);
 
     if (condition && isOnce) {
       openPopupAction('.popup-gift');
