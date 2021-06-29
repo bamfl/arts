@@ -8,6 +8,7 @@ import hoverArts from './modules/hoverArts';
 import accordion from './modules/accordion';
 import burgerMenu from './modules/burgerMenu';
 import anchorScroll from './modules/anchorScroll';
+import fileDragAndDrop from './modules/fileDragAndDrop';
 
 document.addEventListener('DOMContentLoaded', () => {
 	slider();
@@ -20,4 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
 	accordion();
 	burgerMenu();
 	anchorScroll('.pageup');
+	fileDragAndDrop();
 });
