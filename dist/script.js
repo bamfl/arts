@@ -1010,24 +1010,6 @@ module.exports = function (exec) {
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/core-js/internals/forced-string-html-method.js":
-/*!*********************************************************************!*\
-  !*** ./node_modules/core-js/internals/forced-string-html-method.js ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
-
-// check the existence of a method, lowercase
-// of a tag and escaping quotes in arguments
-module.exports = function (METHOD_NAME) {
-  return fails(function () {
-    var test = ''[METHOD_NAME]('"');
-    return test !== test.toLowerCase() || test.split('"').length > 3;
-  });
-=======
 /***/ "./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js":
 /*!******************************************************************************!*\
   !*** ./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js ***!
@@ -1135,7 +1117,27 @@ module.exports = function (KEY, length, exec, sham) {
     );
     if (sham) createNonEnumerableProperty(RegExp.prototype[SYMBOL], 'sham', true);
   }
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
+};
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/internals/forced-string-html-method.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/core-js/internals/forced-string-html-method.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+
+// check the existence of a method, lowercase
+// of a tag and escaping quotes in arguments
+module.exports = function (METHOD_NAME) {
+  return fails(function () {
+    var test = ''[METHOD_NAME]('"');
+    return test !== test.toLowerCase() || test.split('"').length > 3;
+  });
 };
 
 
@@ -3734,23 +3736,15 @@ $({ target: PROMISE, stat: true, forced: INCORRECT_ITERATION }, {
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./node_modules/core-js/modules/es.string.link.js":
 /*!********************************************************!*\
   !*** ./node_modules/core-js/modules/es.string.link.js ***!
   \********************************************************/
-=======
-/***/ "./node_modules/core-js/modules/es.string.split.js":
-/*!*********************************************************!*\
-  !*** ./node_modules/core-js/modules/es.string.split.js ***!
-  \*********************************************************/
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-<<<<<<< HEAD
 var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
 var createHTML = __webpack_require__(/*! ../internals/create-html */ "./node_modules/core-js/internals/create-html.js");
 var forcedStringHTMLMethod = __webpack_require__(/*! ../internals/forced-string-html-method */ "./node_modules/core-js/internals/forced-string-html-method.js");
@@ -3762,7 +3756,19 @@ $({ target: 'String', proto: true, forced: forcedStringHTMLMethod('link') }, {
     return createHTML(this, 'a', 'href', url);
   }
 });
-=======
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.string.split.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.string.split.js ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var fixRegExpWellKnownSymbolLogic = __webpack_require__(/*! ../internals/fix-regexp-well-known-symbol-logic */ "./node_modules/core-js/internals/fix-regexp-well-known-symbol-logic.js");
 var isRegExp = __webpack_require__(/*! ../internals/is-regexp */ "./node_modules/core-js/internals/is-regexp.js");
 var anObject = __webpack_require__(/*! ../internals/an-object */ "./node_modules/core-js/internals/an-object.js");
@@ -3896,7 +3902,6 @@ fixRegExpWellKnownSymbolLogic('split', 2, function (SPLIT, nativeSplit, maybeCal
     }
   ];
 }, !SUPPORTS_Y);
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
 
 
 /***/ }),
@@ -4020,13 +4025,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/hoverArts */ "./src/js/modules/hoverArts.js");
 /* harmony import */ var _modules_accordion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/accordion */ "./src/js/modules/accordion.js");
 /* harmony import */ var _modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./modules/burgerMenu */ "./src/js/modules/burgerMenu.js");
-<<<<<<< HEAD
-/* harmony import */ var _modules_dbGetStyles__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/dbGetStyles */ "./src/js/modules/dbGetStyles.js");
-=======
 /* harmony import */ var _modules_anchorScroll__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/anchorScroll */ "./src/js/modules/anchorScroll.js");
 /* harmony import */ var _modules_fileDragAndDrop__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/fileDragAndDrop */ "./src/js/modules/fileDragAndDrop.js");
+/* harmony import */ var _modules_dbGetStyles__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/dbGetStyles */ "./src/js/modules/dbGetStyles.js");
 
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
+
 
 
 
@@ -4047,12 +4050,9 @@ document.addEventListener('DOMContentLoaded', function () {
   Object(_modules_hoverArts__WEBPACK_IMPORTED_MODULE_6__["default"])();
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_7__["default"])();
   Object(_modules_burgerMenu__WEBPACK_IMPORTED_MODULE_8__["default"])();
-<<<<<<< HEAD
-  Object(_modules_dbGetStyles__WEBPACK_IMPORTED_MODULE_9__["default"])();
-=======
+  Object(_modules_dbGetStyles__WEBPACK_IMPORTED_MODULE_11__["default"])();
   Object(_modules_anchorScroll__WEBPACK_IMPORTED_MODULE_9__["default"])('.pageup');
   Object(_modules_fileDragAndDrop__WEBPACK_IMPORTED_MODULE_10__["default"])();
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
 });
 
 /***/ }),
@@ -4338,23 +4338,15 @@ var calc = function calc() {
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./src/js/modules/dbGetStyles.js":
 /*!***************************************!*\
   !*** ./src/js/modules/dbGetStyles.js ***!
   \***************************************/
-=======
-/***/ "./src/js/modules/fileDragAndDrop.js":
-/*!*******************************************!*\
-  !*** ./src/js/modules/fileDragAndDrop.js ***!
-  \*******************************************/
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-<<<<<<< HEAD
 /* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
 /* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
@@ -4390,7 +4382,23 @@ var dbGetStyles = function dbGetStyles() {
         stylesContainer.append(el);
         downloadBtn.remove();
       });
-=======
+    });
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (dbGetStyles);
+
+/***/ }),
+
+/***/ "./src/js/modules/fileDragAndDrop.js":
+/*!*******************************************!*\
+  !*** ./src/js/modules/fileDragAndDrop.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_string_split__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.split */ "./node_modules/core-js/modules/es.string.split.js");
@@ -4459,16 +4467,11 @@ var fileDragAndDrop = function fileDragAndDrop() {
       arr[0].length > 6 ? dots = "..." : dots = '.';
       var name = arr[0].substring(0, 6) + dots + arr[1];
       input.previousElementSibling.textContent = name;
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
     });
   });
 };
 
-<<<<<<< HEAD
-/* harmony default export */ __webpack_exports__["default"] = (dbGetStyles);
-=======
 /* harmony default export */ __webpack_exports__["default"] = (fileDragAndDrop);
->>>>>>> 09170ad0573162149f6457a5639b2367a998e56f
 
 /***/ }),
 
