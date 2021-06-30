@@ -1,9 +1,10 @@
 const modals = () => {
 	const openPopupAction = (popupSelector) => {
+		isOnce = false;
+
 		document.querySelector(popupSelector).style.cssText = 'display: block';
-		document.body.style.cssText = `
-			overflow: hidden;
-		`;
+		document.querySelector(popupSelector).classList.add('animated', 'fadeIn');
+		document.body.style.cssText = `overflow: hidden;`;
 
 		if (popupSelector === '.popup-gift') {
 			document.querySelector('.fixed-gift').style.cssText = 'display: none';
@@ -16,9 +17,6 @@ const modals = () => {
 
 	document.body.addEventListener('scroll', () => {
 		let condition = document.body.scrollTop + document.documentElement.clientHeight >= document.body.scrollHeight;
-
-		console.log(document.body.scrollTop + document.documentElement.clientHeight);
-		console.log(document.body.scrollHeight);
 		
 		if (condition && isOnce) {
 			openPopupAction('.popup-gift');
